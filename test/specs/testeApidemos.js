@@ -22,27 +22,61 @@ describe("Fluxo App/Alert Dialogs/OK CANCEL DIALOG WITH MESSAGE", () => {
 });
 
 describe("App/Alert Dialogs/LIST DIALOG", () =>{
-    it.only("Verifica fluxo do caminho e visiibilidade dos botões dos 'Commands'", async() => {
-        await $('android=new UiSelector().text("App").className("android.widget.TextView")').click(); //Botão "App"
-        await $('android=new UiSelector().text("Alert Dialogs").className("android.widget.TextView")').click(); //Botão "Alert Dialogs"
-        await $('android=new UiSelector().text("LIST DIALOG")').click(); //Lista de diálogos
-        await $("id=alertTitle").isDisplayed(); // título
+    it("Verifica fluxo do caminho e visiibilidade dos botões dos 'Commands'", async() => {
+        await $('android=new UiSelector().text("App").className("android.widget.TextView")').click(); 
+        await $('android=new UiSelector().text("Alert Dialogs").className("android.widget.TextView")').click(); 
+        await $('android=new UiSelector().text("LIST DIALOG")').click(); 
+        await $("id=alertTitle").isDisplayed(); 
         await $('android=new UiSelector().text("Command one").className("android.widget.TextView")').isDisplayed();
         await $('android=new UiSelector().text("Command two").className("android.widget.TextView")').isDisplayed();
         await $('android=new UiSelector().text("Command three").className("android.widget.TextView")').isDisplayed();
         await $('android=new UiSelector().text("Command four").className("android.widget.TextView")').isDisplayed();
     });
+});
 
-    it("Verifica caminho do 'Command One' e texto da caixa de mensagem", () => {
-        await $('android=new UiSelector().text("App").className("android.widget.TextView")').click(); //Botão "App"
-        await $('android=new UiSelector().text("Alert Dialogs").className("android.widget.TextView")').click(); //Botão "Alert Dialogs"
-        await $('android=new UiSelector().text("LIST DIALOG")').click(); //Lista de diálogos
+describe("App/Alert Dialogs/LIST DIALOG - Command one ", () => { 
+    it("Verifica botão Command One", async() => {
+        await $('android=new UiSelector().text("App").className("android.widget.TextView")').click(); 
+        await $('android=new UiSelector().text("Alert Dialogs").className("android.widget.TextView")').click();
+        await $('android=new UiSelector().text("LIST DIALOG")').click(); 
         await $('android=new UiSelector().text("Command one").className("android.widget.TextView")').click();
-        const mensOne = await $("id=message").getText();
-        expect(mensOne).toBe("You selected: 0 , Command one");
-    })
+        const mensOne = await $('android=new UiSelector().text("You selected: 0 , Command one").className("android.widget.TextView")').isDisplayed();
+        expect(mensOne).toBe(true);
+    });
 }); 
 
+describe("App/Alert Dialogs/LIST DIALOG - Command two ", () => { 
+    it("Verifica botão Command two", async() => {
+        await $('android=new UiSelector().text("App").className("android.widget.TextView")').click(); 
+        await $('android=new UiSelector().text("Alert Dialogs").className("android.widget.TextView")').click();
+        await $('android=new UiSelector().text("LIST DIALOG")').click(); 
+        await $('android=new UiSelector().text("Command two").className("android.widget.TextView")').click();
+        const mensTwo = await $('android=new UiSelector().text("You selected: 1 , Command two").className("android.widget.TextView")').isDisplayed();
+        expect(mensTwo).toBe(true);
+    });
+}); 
+
+describe("App/Alert Dialogs/LIST DIALOG - Command three ", () => { 
+    it("Verifica botão Command three", async() => {
+        await $('android=new UiSelector().text("App").className("android.widget.TextView")').click(); 
+        await $('android=new UiSelector().text("Alert Dialogs").className("android.widget.TextView")').click();
+        await $('android=new UiSelector().text("LIST DIALOG")').click(); 
+        await $('android=new UiSelector().text("Command three").className("android.widget.TextView")').click();
+        const mensThree = await $('android=new UiSelector().text("You selected: 2 , Command three").className("android.widget.TextView")').isDisplayed();
+        expect(mensThree).toBe(true);
+    });
+}); 
+
+describe("App/Alert Dialogs/LIST DIALOG - Command four ", () => { 
+    it("Verifica botão Command four", async() => {
+        await $('android=new UiSelector().text("App").className("android.widget.TextView")').click(); 
+        await $('android=new UiSelector().text("Alert Dialogs").className("android.widget.TextView")').click();
+        await $('android=new UiSelector().text("LIST DIALOG")').click(); 
+        await $('android=new UiSelector().text("Command four").className("android.widget.TextView")').click();
+        const mensFour = await $('android=new UiSelector().text("You selected: 3 , Command four").className("android.widget.TextView")').isDisplayed();
+        expect(mensFour).toBe(true);
+    });
+}); 
 describe("App/Fragment/Hide and Show", () => {  
     it("Verifica fluxo do caminho e texto dos botões" , async() => {
         await $('android=new UiSelector().text("App").className("android.widget.TextView")').click(); //Botão "App"
@@ -55,7 +89,7 @@ describe("App/Fragment/Hide and Show", () => {
     }); 
 });
 
-describe("App/Action Bar/Display options-DISPLAY_HOME_AS_UP", () => {
+describe("App/Action Bar/Display options", () => {
     it("Verifica fluxo do caminho e visibilidade da lista options", async() => {
         await $('android=new UiSelector().text("App").className("android.widget.TextView")').click(); //Botão "App"
         await $('android=new UiSelector().text("Action Bar").className("android.widget.TextView")').click();
