@@ -3,21 +3,32 @@ afterEach(() => {
 });
 
 describe("Fluxo App/Alert Dialogs/OK CANCEL DIALOG WITH MESSAGE", () => {
-    it("Entra no App Verifica se o título do app é API Demos", async () => {
-       const textoTitulo = await $("android.widget.TextView").getText();
-       expect(textoTitulo).toBe("API Demos");  
-    });
-
     it("Verifica fluxo do caminho e acesso a caixa de mensagem - CANCEL e OK", async () => {
         await $('android=new UiSelector().text("App").className("android.widget.TextView")').click(); //Botão "App"
         await $('android=new UiSelector().text("Alert Dialogs").className("android.widget.TextView")').click(); 
         await $("android.widget.Button").click(); //Botão mensagem: "OK CANCEL DIALOG WITH MESSAGE"
-            const caixaMensage = await $("android.widget.FrameLayout").isDisplayed();
-            expect(caixaMensage).toBe(true);
-        const buttonCancel = await $('android=new UiSelector().text("Cancel").className("android.widget.Button")').isDisplayed();
-        expect(buttonCancel).toBe(true);
-        const buttonOK = await $('android=new UiSelector().text("OK").className("android.widget.Button")').isDisplayed();
-        expect(buttonOK).toBe(true);
+        const caixaMensage = await $("android.widget.FrameLayout").isDisplayed();
+        expect(caixaMensage).toBe(true);
+    }); 
+});
+
+describe("Fluxo App/Alert Dialogs/OK CANCEL DIALOG WITH MESSAGE - BOTÃO CANCEL", () => {
+    it("Verifica botão CANCEL", async () => {
+        await $('android=new UiSelector().text("App").className("android.widget.TextView")').click(); //Botão "App"
+        await $('android=new UiSelector().text("Alert Dialogs").className("android.widget.TextView")').click(); 
+        await $("android.widget.Button").click(); //Botão mensagem: "OK CANCEL DIALOG WITH MESSAGE"
+        const buttonCanc = await $('android=new UiSelector().text("CANCEL").className("android.widget.Button")').isEnabled();
+        expect(buttonCanc).toBe(true);
+    }); 
+});
+
+describe("Fluxo App/Alert Dialogs/OK CANCEL DIALOG WITH MESSAGE - BOTÃO OK", () => {
+    it.only("Verifica botão OK", async () => {
+        await $('android=new UiSelector().text("App").className("android.widget.TextView")').click(); //Botão "App"
+        await $('android=new UiSelector().text("Alert Dialogs").className("android.widget.TextView")').click(); 
+        await $("android.widget.Button").click(); //Botão mensagem: "OK CANCEL DIALOG WITH MESSAGE"
+       await $('android=new UiSelector().text("OK").className("android.widget.Button")').click();
+        
     }); 
 });
 
@@ -77,6 +88,7 @@ describe("App/Alert Dialogs/LIST DIALOG - Command four ", () => {
         expect(mensFour).toBe(true);
     });
 }); 
+
 describe("App/Fragment/Hide and Show", () => {  
     it("Verifica fluxo do caminho e texto dos botões" , async() => {
         await $('android=new UiSelector().text("App").className("android.widget.TextView")').click(); //Botão "App"
