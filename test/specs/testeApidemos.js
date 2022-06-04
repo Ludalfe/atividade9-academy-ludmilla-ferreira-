@@ -22,12 +22,11 @@ describe("Fluxo App/Alert Dialogs/OK CANCEL DIALOG WITH MESSAGE", () => {
 });
 
 describe("App/Alert Dialogs/LIST DIALOG", () =>{
-    xit("Fluxo do caminho e verifica acessibilidade botoes", async() => {
+    xit("Verifica fluxo do caminho e acessibilidade dos botões", async() => {
         await $('android=new UiSelector().text("App").className("android.widget.TextView")').click(); //Botão "App"
         await $('android=new UiSelector().text("Alert Dialogs").className("android.widget.TextView")').click(); //Botão "Alert Dialogs"
-        await $('android=new UiSelector().text("List dialog").className("android.widget.Button")').click(); //Lista de diálogos
-        const titText =await $("id=alertTitle").isDisplayed(); // título
-        expect(titText).toBe(true);
+        await $('android=new UiSelector().text("LIST DIALOG")').click(); //Lista de diálogos
+        await $("id=alertTitle").isDisplayed(); // título
         await $('android=new UiSelector().text("Command one").className("android.widget.TextView")').isDisplayed();
         await $('android=new UiSelector().text("Command one").className("android.widget.TextView")').click();
         await $('android=new UiSelector().text("Command two").className("android.widget.TextView")').isDisplayed();
@@ -37,7 +36,7 @@ describe("App/Alert Dialogs/LIST DIALOG", () =>{
 }); 
 
 describe("App/Fragment/Hide and Show", () => {  
-    xit("teste" , async() => {
+    xit("Verifica fluxo do caminho e texto dos botões" , async() => {
         await $('android=new UiSelector().text("App").className("android.widget.TextView")').click(); //Botão "App"
         await $('android=new UiSelector().text("Fragment").className("android.widget.TextView")').click(); //Botão "Fragment"
         await $('android=new UiSelector().text("Hide and Show").className("android.widget.TextView")').click(); //Botao Hide and Show
@@ -45,19 +44,14 @@ describe("App/Fragment/Hide and Show", () => {
         expect(BtnHide1).toBe("HIDE");
         const BtnHide2 = await $("id=frag2hide").getText();
         expect(BtnHide2).toBe("HIDE");
-        
-        
-        
-        
-        
     }); 
 });
 
 describe("App/Action Bar/Display options-DISPLAY_HOME_AS_UP", () => {
-    xit("Testando caminho", async() => {
-        await $("~App").click(); //Botão "App"
-        await $("~Action Bar").click();
-        await $("~Display Options").click(); 
+    it("Verifica fluxo do caminho e visibilidade da lista options", async() => {
+        await $('android=new UiSelector().text("App").className("android.widget.TextView")').click(); //Botão "App"
+        await $('android=new UiSelector().text("Action Bar").className("android.widget.TextView")').click();
+        await $('android=new UiSelector().text("Display Options").className("android.widget.TextView")').click();
         await $("id=toggle_home_as_up").isDisplayed(); 
         await $("id=toggle_show_home").isDisplayed(); 
         await $("id=toggle_use_logo").isDisplayed(); 
@@ -65,19 +59,32 @@ describe("App/Action Bar/Display options-DISPLAY_HOME_AS_UP", () => {
         await $("id=toggle_show_custom").isDisplayed(); 
         await $("id=toggle_navigation").isDisplayed(); 
         await $("id=cycle_custom_gravity").isDisplayed(); 
-
     }); 
 });
 
-describe("App/Action Bar/Display options-DISPLAY_SHOW_TITLE", () =>{
-    xit("Testando botao title", async() => {
-        await $("~App").click(); //Botão "App"
-        await $("~Action Bar").click();
-        await $("~Display Options").click();
-        await $("id=toggle_show_title").click();
+describe("App/Action Bar/Display options-DISPLAY_HOME_AS_UP", () =>{
+    it("Verifica botão 'Home AS UP' se funciona", async() => {
+        await $('android=new UiSelector().text("App").className("android.widget.TextView")').click(); //Botão "App"
+        await $('android=new UiSelector().text("Action Bar").className("android.widget.TextView")').click();
+        await $('android=new UiSelector().text("Display Options").className("android.widget.TextView")').click();
+        const button1 = await $("id=toggle_home_as_up").isDisplayed();
+        expect(button1).toBe(true);
+        await $("id=toggle_home_as_up").click();
+        const titText = await $('android=new UiSelector().text("App/Action Bar/Display Options").className("android.widget.TextView")').isDisplayed();
+        expect(titText).toBe(true);
     });
 });
 
+describe("App/Action Bar/Display options-DISPLAY_SHOW_TITLE", () =>{
+    it.only("Verifica botão 'SHOW TITLE' se funciona", async() => {
+        await $('android=new UiSelector().text("App").className("android.widget.TextView")').click(); //Botão "App"
+        await $('android=new UiSelector().text("Action Bar").className("android.widget.TextView")').click();
+        await $('android=new UiSelector().text("Display Options").className("android.widget.TextView")').click();     
+        await $("id=toggle_show_title").click();
+        const button2 = await $("id=toggle_show_title").isDisplayed();
+        expect(button2).toBe(true);
+    });
+});
 describe("App/Action Bar/Display options-DISPLAY_SHOW_CUSTOM", () =>{
     xit("Testando botao custom", async() => {
         await $("~App").click(); //Botão "App"
